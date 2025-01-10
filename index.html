@@ -1,0 +1,554 @@
+<html><head><base href="."><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Nosso Amor</title>
+    <style>
+      /* Base styles */
+      :root {
+        --primary: #FF577F;
+        --secondary: #FFB3C6; 
+        --text: #2C3333;
+        --bg: #fef6f6;
+        --gradient: linear-gradient(135deg, #FF577F, #FF884B);
+        --card-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      }
+    
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
+    
+      html {
+        scroll-behavior: smooth;
+      }
+    
+      body {
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+    
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+    
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        padding: 1rem;
+      }
+    
+      /* Cards de Elogios */
+      .compliment-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+    
+      .card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: var(--card-shadow);
+        border-radius: 15px;
+        padding: 2rem;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    
+      .card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(255,107,107,0.2);
+        background: var(--gradient);
+      }
+    
+      .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient);
+        opacity: 0;
+        transition: opacity 0.4s;
+        z-index: 1;
+      }
+    
+      .card-content {
+        position: relative;
+        z-index: 2;
+        font-size: 1.2rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+    
+      .card:hover .card-content {
+        color: white;
+      }
+    
+      /* Texto Emocionante */
+      .romantic-text {
+        font-size: 1.3rem;
+        line-height: 1.8;
+        text-align: center;
+        margin: 4rem 0;
+        padding: 3rem;
+        background: white;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        position: relative;
+      }
+    
+      .romantic-text::before {
+        content: '"';
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 6rem;
+        color: var(--primary);
+        opacity: 0.2;
+      }
+    
+      /* Contador */
+      .counter {
+        text-align: center;
+        margin: 4rem 0;
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+    
+      .counter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+    
+      .counter-item {
+        padding: 1rem;
+        animation: float 3s ease-in-out infinite;
+      }
+    
+      .counter-item:nth-child(2) { 
+        animation-delay: 0.2s; 
+      }
+      .counter-item:nth-child(3) { 
+        animation-delay: 0.4s; 
+      }
+      .counter-item:nth-child(4) { 
+        animation-delay: 0.6s; 
+      }
+    
+      .counter-value {
+        font-size: 2.8rem;
+        font-weight: 700;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+      }
+    
+      .counter-label {
+        font-size: 1rem;
+        color: var(--text);
+        opacity: 0.8;
+      }
+    
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+    
+      /* Timeline */
+      .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 4rem auto;
+        padding: 2rem 0;
+      }
+    
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 3px;
+        background: var(--gradient);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 3px;
+      }
+    
+      .timeline-item {
+        padding: 2rem;
+        position: relative;
+        width: calc(50% - 30px);
+        margin: 2rem 0;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: var(--card-shadow);
+        border-radius: 15px;
+      }
+    
+      .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: var(--primary);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    
+      .timeline-item:nth-child(odd) {
+        margin-right: calc(50% + 30px);
+      }
+    
+      .timeline-item:nth-child(odd)::after {
+        right: -40px;
+      }
+    
+      .timeline-item:nth-child(even) {
+        margin-left: calc(50% + 30px);
+      }
+    
+      .timeline-item:nth-child(even)::after {
+        left: -40px;
+      }
+    
+      /* Mensagens Secretas */
+      .secret-messages {
+        margin: 4rem 0;
+        text-align: center;
+      }
+    
+      .special-moments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+    
+      .moment-card {
+        position: relative;
+        height: 350px;
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.4s ease;
+      }
+    
+      .moment-card:hover {
+        transform: translateY(-10px);
+      }
+    
+      .moment-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+    
+      .moment-card:hover .moment-image {
+        transform: scale(1.1);
+      }
+    
+      .moment-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        padding: 2rem;
+        color: white;
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+      }
+    
+      .moment-card:hover .moment-overlay {
+        transform: translateY(0);
+      }
+    
+      .moment-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+    
+      .moment-date {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-bottom: 1rem;
+      }
+    
+      .moment-description {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+    
+      /* Error handling and success styles */
+      .password-input.error {
+        animation: shake 0.5s;
+      }
+    
+      .password-input.success {
+        background-color: rgba(0, 255, 0, 0.1);
+      }
+    
+      .error-message {
+        color: #ff4444;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        animation: fadeIn 0.3s;
+      }
+    
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+      }
+    
+      @media (max-width: 768px) {
+        .timeline::after {
+          left: 31px;
+        }
+        
+        .timeline-item {
+          width: calc(100% - 60px);
+          margin-left: 60px !important;
+        }
+        
+        .timeline-item::after {
+          left: -29px !important;
+        }
+        
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+    </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    </head>
+    <body>
+    
+    <div class="container">
+      <h1 class="section-title">Amor para você, tudo para você.</h1>
+      
+      <div class="compliment-cards">
+        <div class="card">
+          <div class="card-content" data-message="Você e muito linda">
+            Clique para descobrir
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content" data-message="Eu te amo muito amor">
+            Clique para descobrir
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content" data-message="Amor receber seu carinho e seu amor.">
+            Clique para descobrir
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-content" data-message="Preciso mais de você comigo.">
+              Clique para descobrir
+            </div>
+            </div>
+            <div class="card">
+                <div class="card-content" data-message="Esteja mais presente comigo.">
+                  Clique para descobrir
+                </div>
+                </div>
+                <div class="card">
+                    <div class="card-content" data-message="Preciso que você faça mais comigo.">
+                      Clique para descobrir
+                    </div>
+                    </div>
+      </div>
+    
+      <div class="romantic-text">
+        <p>Meu amor so para mandar uma forma fofa e carinhosa por aqui amor para tentar te passar algo que pode ser bom por ai amor, eu espero que chegue bem amor. 
+            Não estou conseguindo me expressar muito por ações ou palavras, mais quero deixar claro que vou esforçando como eu posso e vou melhorar para fazer com ações e mais palavras.
+            Quero te entregar isso de uma forma de coração.
+            
+            Muito obrigado amor pelo dia(09/01/2025) foi um dia de conhecimento e sim amei estar com você e gostei de cada momento. Quero que possamos resolver tudo e sim estar melhor a cada dia , sei que temos muitas coisas para conversar, mais estou confiando em você amor, eu te amo muito amor ❤️</p>
+      </div>
+    
+      <div class="counter">
+        <h2 class="section-title">Tempo Juntos</h2>
+        <div class="counter-grid">
+          <div class="counter-item">
+            <div class="counter-value" id="days">0</div>
+            <div class="counter-label">Dias</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-value" id="hours">0</div>
+            <div class="counter-label">Horas</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-value" id="minutes">0</div>
+            <div class="counter-label">Minutos</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-value" id="seconds">0</div>
+            <div class="counter-label">Segundos</div>
+          </div>
+        </div>
+      </div>
+    
+      <h2 class="section-title">Nossa Hist&#xf3;ria</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Primeiro Encontro</h3>
+          <p>Nosso primeiro dia no Outback tenho saudade , precisamos de mais assim.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Primeiro Beijo</h3>
+          <p>Esse dia do cinema eu quero muito repitir pois e muito especial no meu coração.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Dia Junto</h3>
+          <p>Eu amo quando voce cofia em mim e fica como se eu fosse tudo que voce precisa me sinto muito especial e util para você.</p>
+        </div>
+      </div>
+    
+      <div class="secret-messages">
+        <h2 class="section-title">Momentos Especiais</h2>
+        <div class="special-moments-grid">
+          <div class="moment-card">
+            <img src="/photo_2025-01-10_02-23-49.jpg" alt="Primeiro Encontro" class="moment-image">
+            <div class="moment-overlay">
+              <h3 class="moment-title">Dia na Igreja</h3>
+              <div class="moment-date">Logo após a Virada</div>
+              <p class="moment-description">Foi um dia que trabalhamos muito juntos e foi um otimo dia.</p>
+            </div>
+          </div>
+          
+          <div class="moment-card">
+            <img src="/photo_2025-01-10_02-23-45.jpg" alt="Primeira Viagem" class="moment-image">
+            <div class="moment-overlay">
+              <h3 class="moment-title">Eu amo essa foto.</h3>
+              <div class="moment-date">Dia Otimo com você</div>
+              <p class="moment-description">Eu amo essa foto que diz um pouco de como sou feliz com você.</p>
+            </div>
+          </div>
+          
+          <div class="moment-card">
+            <img src="/photo_2025-01-10_02-23-40.jpg" alt="Anivers&#xe1;rio Surpresa" class="moment-image">
+            <div class="moment-overlay">
+              <h3 class="moment-title">Nossa ano Novo</h3>
+              <div class="moment-date">01 Janeiro 2024</div>
+              <p class="moment-description">Um ano novo muito melhor e muito mais do que poderia se imaginar e posso sim dizer foi otimo passar com você.</p>
+            </div>
+
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+    'use strict';
+
+const START_DATE = '2023-01-01';
+function animateValue(id, value) {
+  const element = document.getElementById(id);
+  const current = parseInt(element.textContent);
+  if (current !== value) {
+    const increment = value > current ? 1 : -1;
+    const newValue = current + increment;
+    element.textContent = newValue;
+    requestAnimationFrame(() => animateValue(id, value));
+  }
+}
+function updateCounter() {
+  const now = new Date().getTime();
+  const difference = now - new Date(START_DATE).getTime();
+  
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+  // Update displays with smooth animation
+  requestAnimationFrame(() => {
+    animateValue('days', days);
+    animateValue('hours', hours); 
+    animateValue('minutes', minutes);
+    animateValue('seconds', seconds);
+  });
+}
+
+setInterval(updateCounter, 1000);
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const content = card.querySelector('.card-content');
+        card.addEventListener('click', () => {
+          content.textContent = content.dataset.message;
+          card.style.background = 'var(--gradient)';
+          content.style.color = 'white';
+        });
+      });
+      const secretCards = document.querySelectorAll('.secret-card');
+      secretCards.forEach((card, index) => {
+        const front = card.querySelector('.secret-card-front');
+        const input = front.querySelector('.secret-input');
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        front.appendChild(errorMsg);
+        input.addEventListener('input', e => {
+          const value = e.target.value.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          const correctIndex = PASSWORDS.cards[value];
+          if (correctIndex === index) {
+            errorMsg.textContent = '';
+            card.classList.add('flipped', 'success-animation');
+            input.classList.add('success');
+            input.classList.remove('error');
+          } else if (value.length > 3) {
+            errorMsg.textContent = 'Senha incorreta, tente novamente!';
+            input.classList.add('error');
+            input.classList.remove('success');
+            card.classList.remove('success-animation');
+          }
+        });
+        card.addEventListener('click', e => {
+          if (e.target.closest('.secret-input')) return;
+          if (card.classList.contains('flipped')) {
+            card.classList.remove('flipped');
+            setTimeout(() => {
+              input.value = '';
+              input.classList.remove('error', 'success');
+              errorMsg.textContent = '';
+            }, 300);
+          }
+        });
+      });
+    });</script>
+    
+    </body></html>
